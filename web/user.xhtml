@@ -3,11 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <p:dialog id="dlgDetalle"  widgetVar="dlgdetalle" closeOnEscape="true" header="Alta de usuario">
+            <ui:include src="userdetaildlg.xhtml"/>
+        </p:dialog>
         <h1>Usuarios con DAO y Primefaces</h1>
 
         <h:form id="form">
@@ -33,7 +37,12 @@
                     </h:outputText>
                 </p:column>
             </p:dataTable>
-
+            <br/>
+            <hr/>
+            <p:commandButton id="btnNuevo" action="#{userBean.newUser()}" onclick="PF('dlgDetalle').show();" icon="ui-icon-plus" value="Nuevo Usuario" ajax="false"/>
+            <br/>
+            <hr/>
+            <br/>
             <p:dataTable id="dtProjects" var="project" value="#{userBean.selectedUser.projects}">
                 <f:facet name="header">
                     Proyectos
@@ -57,6 +66,7 @@
             </p:dataTable>
         </h:form>
 
+        
     </h:body>
 
 </html>

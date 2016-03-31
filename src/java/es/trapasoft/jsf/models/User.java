@@ -125,5 +125,19 @@ public class User implements Serializable {
         return String.format("User[id=%d,email=%s,firstname=%s,lastname=%s,birthdate=%s]",
             id, email, firstname, lastname, birthdate);
     }
+    
+    /**
+     * Comprueba si el objeto está vacío, aunque esté creado
+     * @return 
+     */
+    public boolean isEmpty() {
+        if (id != null 
+                || firstname != null 
+                || lastname != null 
+                || email != null 
+                || birthdate != null 
+                || (!projects.isEmpty())) return false;
+        return true;
+    }
  
 }

@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <navigation-rule>
+        <from-view-id>/user.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.newUser}</from-action>
+            <from-outcome>userdetail</from-outcome>
+            <to-view-id>/userdetail.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/userdetail.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{userBean.salvarUsuario}</from-action>
+            <from-outcome>user</from-outcome>
+            <to-view-id>/user.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
