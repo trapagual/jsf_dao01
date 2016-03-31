@@ -24,23 +24,23 @@ public class UserDAOJDBC implements UserDAO {
 
     // Constants ----------------------------------------------------------------------------------
     private static final String SQL_FIND_BY_ID
-            = "SELECT id, email, firstname, lastname, birthdate FROM Users WHERE id = ?";
+            = "SELECT id, email, firstname, lastname, birthdate FROM users WHERE id = ?";
     private static final String SQL_FIND_BY_EMAIL_AND_PASSWORD
-            = "SELECT id, email, firstname, lastname, birthdate FROM Users WHERE email = ? AND password = MD5(?)";
+            = "SELECT id, email, firstname, lastname, birthdate FROM users WHERE email = ? AND password = MD5(?)";
     private static final String SQL_FIND_PROJECT_BY_USER_ID
             = "select p.id, p.name, p.description, p.startDate, p.dueDate, p.estimatedHours from projects p, projects_users pu where p.id=pu.project_id and pu.user_id = ?";
     private static final String SQL_LIST_ORDER_BY_ID
-            = "SELECT id, email, firstname, lastname, birthdate FROM Users ORDER BY id";
+            = "SELECT id, email, firstname, lastname, birthdate FROM users ORDER BY id";
     private static final String SQL_INSERT
-            = "INSERT INTO Users (email, password, firstname, lastname, birthdate) VALUES (?, MD5(?), ?, ?, ?)";
+            = "INSERT INTO users (email, password, firstname, lastname, birthdate) VALUES (?, MD5(?), ?, ?, ?)";
     private static final String SQL_UPDATE
-            = "UPDATE Users SET email = ?, firstname = ?, lastname = ?, birthdate = ? WHERE id = ?";
+            = "UPDATE users SET email = ?, firstname = ?, lastname = ?, birthdate = ? WHERE id = ?";
     private static final String SQL_DELETE
-            = "DELETE FROM Users WHERE id = ?";
+            = "DELETE FROM users WHERE id = ?";
     private static final String SQL_EXIST_EMAIL
-            = "SELECT id FROM Users WHERE email = ?";
+            = "SELECT id FROM users WHERE email = ?";
     private static final String SQL_CHANGE_PASSWORD
-            = "UPDATE Users SET password = MD5(?) WHERE id = ?";
+            = "UPDATE users SET password = MD5(?) WHERE id = ?";
     private static final String SQL_ADD_PROJECT_TO_USER
             = "insert into projects_users (user_id, project_id) values (?, ?)";
     private static final String SQL_DEL_PROJECT_FROM_USER

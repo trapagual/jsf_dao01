@@ -7,6 +7,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
+
     </h:head>
     <h:body>
         <p:dialog id="dlgDetalle"  widgetVar="dlgdetalle" closeOnEscape="true" header="Alta de usuario">
@@ -39,7 +41,7 @@
             </p:dataTable>
             <br/>
             <hr/>
-            <p:commandButton id="btnNuevo" action="#{userBean.newUser()}" onclick="PF('dlgDetalle').show();" icon="ui-icon-plus" value="Nuevo Usuario" ajax="false"/>
+            <p:commandButton id="btnNuevo" actionListener="#{userBean.newUserDlg()}" icon="ui-icon-plus" value="Nuevo Usuario" />
             <br/>
             <hr/>
             <br/>
@@ -70,4 +72,3 @@
     </h:body>
 
 </html>
-
