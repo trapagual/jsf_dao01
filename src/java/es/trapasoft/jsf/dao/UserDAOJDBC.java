@@ -28,7 +28,7 @@ public class UserDAOJDBC implements UserDAO {
     private static final String SQL_FIND_BY_EMAIL_AND_PASSWORD
             = "SELECT id, email, firstname, lastname, birthdate FROM Users WHERE email = ? AND password = MD5(?)";
     private static final String SQL_FIND_PROJECT_BY_USER_ID
-            = "select  u.id, u.name, u.description, u.startDate, u.dueDate, u.estimatedHours from users u, projects_users pu where u.id = pu.user_id and pu.user_id = ?";
+            = "select p.id, p.name, p.description, p.startDate, p.dueDate, p.estimatedHours from projects p, projects_users pu where p.id=pu.project_id and pu.user_id = ?";
     private static final String SQL_LIST_ORDER_BY_ID
             = "SELECT id, email, firstname, lastname, birthdate FROM Users ORDER BY id";
     private static final String SQL_INSERT
@@ -268,13 +268,12 @@ public class UserDAOJDBC implements UserDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Project p = new Project();
-                p.setId(rs.getLong("id"));
-                p.setName(rs.getString("name"));
-                p.setDescription(rs.getString("description"));
-                p.setStartDate(rs.getDate("startDate"));
-                p.setDueDate(rs.getDate("dueDate"));
-                p.setEstimatedHours(rs.getLong("estimatedHours"));
-                p.setParentId(rs.getLong("parent_id"));
+                p.setId(rs.getLong("p.id"));
+                p.setName(rs.getString("p.name"));
+                p.setDescription(rs.getString("p.description"));
+                p.setStartDate(rs.getDate("p.startDate"));
+                p.setDueDate(rs.getDate("p.dueDate"));
+                p.setEstimatedHours(rs.getLong("p.estimatedHours"));
                 ProjectDAOJDBC pdao = new ProjectDAOJDBC(daoFactory);
                 p.setUsers(pdao.findUsersByProjectId(p.getId()));
                 projects.add(p);

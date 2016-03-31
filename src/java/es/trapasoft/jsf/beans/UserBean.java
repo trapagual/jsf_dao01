@@ -8,9 +8,10 @@ package es.trapasoft.jsf.beans;
 import es.trapasoft.jsf.dao.DAOFactory;
 import es.trapasoft.jsf.dao.ProjectDAO;
 import es.trapasoft.jsf.dao.UserDAO;
-import es.trapasoft.jsf.models.Project;
 import es.trapasoft.jsf.models.User;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -30,7 +31,8 @@ public class UserBean {
     private List<User> users;
     
     private User selectedUser;
-    private ProjectDAO projectDAO;
+    
+    private static Logger LOG = Logger.getLogger(UserBean.class.getName());
     
     /**
      * Creates a new instance of UserBean
@@ -43,6 +45,8 @@ public class UserBean {
         javabase = DAOFactory.getInstance("javabase.jdbc");
         userDAO = javabase.getUserDAO();
         users = userDAO.list();
+        LOG.log(Level.INFO, "Init: users tiene "+users.size() + " registros.");
+        
     }
     
     /* ------------ EVENTOS -------------------- */
@@ -70,8 +74,6 @@ public class UserBean {
     public void setSelectedUser(User selectedUser) {
         this.selectedUser = selectedUser;
         if (selectedUser != null) {
-            projectDAO = javabase.getProjectDAO();
-            // MAL AQUI HAY QUE RELLENAR LOS PROYECTOS DEL USUARIO   projects = projectDAO.findUsersByProjectId(selectedUser.getId());
             selectedUser.setProjects(userDAO.findProjectsByUserId(selectedUser.getId()));
         }
     }
